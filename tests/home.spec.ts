@@ -145,7 +145,7 @@ test.describe("Home", () => {
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
-    // Find the nav link using nth locator
+    // Find the nav link using first locator
     const navLink = page.locator("#zak-primary-menu li[id*=menu]").first();
     //   verify nav link text
     expect(await navLink.textContent()).toEqual(expectedLinks[0]);
@@ -162,9 +162,38 @@ test.describe("Home", () => {
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
-    // Find the nav link using nth locator
+    // Find the nav link using last locator
     const navLink = page.locator("#zak-primary-menu li[id*=menu]").last();
     //   verify nav link text
-    expect(await navLink.textContent()).toEqual(expectedLinks[-1]);
+    expect(await navLink.textContent()).toEqual(
+      expectedLinks[expectedLinks.length - 1]
+    );
+  });
+  test("Verify text of all nav links by iterating each link", async ({
+    page,
+  }) => {
+    const expectedLinks = [
+      "Home",
+      "About",
+      "Shop",
+      "Blog",
+      "Contact",
+      "My account",
+    ];
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // Find the nav links using locator
+    const navLinks = page.locator("#zak-primary-menu li[id*=menu]");
+    let i = 0;
+    // elementHandles - NOTE Always prefer using Locators and web assertions over ElementHandles because latter are inherently racy.
+
+    // Resolves given locator to all matching DOM elements. If there are no matching elements, returns an empty list.
+    for (let el of await navLinks.elementHandles()) {
+      console.log(el.textContent());
+      //   verify nav link text
+      expect(await el.textContent()).toEqual(expectedLinks[i]);
+      i++;
+    }
   });
 });

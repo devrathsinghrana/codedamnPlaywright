@@ -71,21 +71,32 @@ test.describe("Home", () => {
     await page.goto("https://practice.sdetunicorns.com");
 
     // find home text
-    const homeText = page.locator("#primary-menu >> text=Home");
+    const homeText = page.locator("#zak-primary-menu >> text=Home");
 
     // verify home text is enabled
     await expect(homeText).toBeEnabled();
   });
-  test("Verify home link is enabled using css selector", async ({
+  test("Verify home link is enabled using css selector", async ({ page }) => {
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // find home text
+    const homeText = page.locator('#zak-primary-menu:has-text("Home")');
+
+    // verify home text is enabled
+    await expect(homeText).toBeEnabled();
+  });
+  test("Verify search icon is visible using xpath selector", async ({
     page,
   }) => {
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
-    // find home text
-    const homeText = page.locator('#primary-menu:has-text("Home")');
-
-    // verify home text is enabled
-    await expect(homeText).toBeEnabled();
+    // Find the search icon
+    const searchIcon = page.locator(
+      "//*[contains(@class, 'zak-header-actions--desktop')]//*[contains(@class, 'zak-header-search__toggle')]//*[contains(@class, 'zak-icon') and contains(@class, 'zakra-icon--magnifying-glass')]"
+    );
+    //   verify search icon is visible
+    await expect(searchIcon).toBeVisible();
   });
 });

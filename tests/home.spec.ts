@@ -42,7 +42,9 @@ test.describe("Home", () => {
       "https://practice.sdetunicorns.com/#get-started"
     );
   });
-  test("Click get started button using css selector and regex", async ({ page }) => {
+  test("Click get started button using css selector and regex", async ({
+    page,
+  }) => {
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
@@ -50,8 +52,16 @@ test.describe("Home", () => {
     await page.locator("#get-started").click(); //id selector is used
 
     //verify url has #get-started
-    await expect(page).toHaveURL(
-      /.*#get-started/
-    );
+    await expect(page).toHaveURL(/.*#get-started/);
+  });
+  test("Verifying heading text using text selector", async ({ page }) => {
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    //  find the text locator
+    const headingText = page.locator("text=Think different. Make different.");
+
+    //verify heading text is visible. not checking if on going to that page heading text is there but whatever page we are in currently heading text is visible. Assertion is done on the locator not page
+    await expect(headingText).toBeVisible();
   });
 });

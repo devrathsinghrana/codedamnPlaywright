@@ -99,4 +99,72 @@ test.describe("Home", () => {
     //   verify search icon is visible
     await expect(searchIcon).toBeVisible();
   });
+  test("Verify text of all nav links", async ({ page }) => {
+    const expectedLinks = [
+      "Home",
+      "About",
+      "Shop",
+      "Blog",
+      "Contact",
+      "My account",
+    ];
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // Find the nav links.
+    const navLinks = page.locator("#zak-primary-menu li[id*=menu]");
+    //   verify nav links text. allTextContents -  Returns an array of node.textContent values for all matching nodes. so order an value of links both will be verified on one condition that expectedLinks array has correct ordered links.
+    expect(await navLinks.allTextContents()).toEqual(expectedLinks);
+  });
+  test("Verify text of particular nav link", async ({ page }) => {
+    const expectedLinks = [
+      "Home",
+      "About",
+      "Shop",
+      "Blog",
+      "Contact",
+      "My account",
+    ];
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // Find the nav link using nth locator
+    const navLink = page.locator("#zak-primary-menu li[id*=menu]").nth(3);
+    //   verify nav link text
+    expect(await navLink.textContent()).toEqual(expectedLinks[3]);
+  });
+  test("Verify text of first nav link", async ({ page }) => {
+    const expectedLinks = [
+      "Home",
+      "About",
+      "Shop",
+      "Blog",
+      "Contact",
+      "My account",
+    ];
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // Find the nav link using nth locator
+    const navLink = page.locator("#zak-primary-menu li[id*=menu]").first();
+    //   verify nav link text
+    expect(await navLink.textContent()).toEqual(expectedLinks[0]);
+  });
+  test("Verify text of last nav link", async ({ page }) => {
+    const expectedLinks = [
+      "Home",
+      "About",
+      "Shop",
+      "Blog",
+      "Contact",
+      "My account",
+    ];
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // Find the nav link using nth locator
+    const navLink = page.locator("#zak-primary-menu li[id*=menu]").last();
+    //   verify nav link text
+    expect(await navLink.textContent()).toEqual(expectedLinks[-1]);
+  });
 });

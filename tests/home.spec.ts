@@ -58,7 +58,7 @@ test.describe("Home", () => {
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
-    //  find the text locator
+    //  find the text locator. Text should be unique
     const headingText = page.locator("text=Think different. Make different.");
 
     //verify heading text is visible. not checking if on going to that page heading text is there but whatever page we are in currently heading text is visible. Assertion is done on the locator not page

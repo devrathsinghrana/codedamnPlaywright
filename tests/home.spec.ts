@@ -42,4 +42,16 @@ test.describe("Home", () => {
       "https://practice.sdetunicorns.com/#get-started"
     );
   });
+  test("Click get started button using css selector and regex", async ({ page }) => {
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    //  click the button
+    await page.locator("#get-started").click(); //id selector is used
+
+    //verify url has #get-started
+    await expect(page).toHaveURL(
+      /.*#get-started/
+    );
+  });
 });

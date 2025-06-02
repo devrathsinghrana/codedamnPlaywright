@@ -64,4 +64,28 @@ test.describe("Home", () => {
     //verify heading text is visible. not checking if on going to that page heading text is there but whatever page we are in currently heading text is visible. Assertion is done on the locator not page
     await expect(headingText).toBeVisible();
   });
+  test("Verify home link is enabled using text and css selector", async ({
+    page,
+  }) => {
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // find home text
+    const homeText = page.locator("#primary-menu >> text=Home");
+
+    // verify home text is enabled
+    await expect(homeText).toBeEnabled();
+  });
+  test("Verify home link is enabled using css selector", async ({
+    page,
+  }) => {
+    //open url
+    await page.goto("https://practice.sdetunicorns.com");
+
+    // find home text
+    const homeText = page.locator('#primary-menu:has-text("Home")');
+
+    // verify home text is enabled
+    await expect(homeText).toBeEnabled();
+  });
 });

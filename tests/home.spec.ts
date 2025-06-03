@@ -51,6 +51,9 @@ test.describe("Home", () => {
     //  click the button
     await page.locator("#get-started").click(); //id selector is used
 
+    //verify url don't have #gesdf (This is part of negative assertion)
+    await expect(page).not.toHaveURL(/.*#gesdf/);
+
     //verify url has #get-started
     await expect(page).toHaveURL(/.*#get-started/);
   });

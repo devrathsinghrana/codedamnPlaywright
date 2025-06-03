@@ -37,7 +37,7 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"], headless: false }, //device name sets height width to check
+      use: { ...devices["Desktop Chrome"], headless: true }, //device name sets height width to check
     },
 
     // {

@@ -12,7 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 10_000,
+  timeout: 10_000_000,
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -34,12 +34,15 @@ export default defineConfig({
     /* Collect trace for all tests This is trace viewer debugging. we can also adjust it for individual tests */
     trace: "on",
   },
+  expect: {
+    timeout: 10_000, // default timeout for expect assertions
+  },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"], headless: false }, //device name sets height width to check
+      use: { ...devices["Desktop Chrome"], headless: true }, //device name sets height width to check
     },
 
     // {

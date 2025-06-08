@@ -14,7 +14,7 @@ test.describe("Home", () => {
     navigating to "https://practice.sdetunicorns.com/", waiting until "load"
     */
     //open url
-    await page.goto("https://practice.sdetunicorns.com/");
+    await homePage.navigate(); //using page object model
 
     /*
     What happens when below assertion fails
@@ -38,7 +38,7 @@ test.describe("Home", () => {
   test("Click get started button using css selector", async ({ page }) => {
     homePage = new HomePage(page);
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     //  click the button
     // await page.locator("#get-started").click(); //id selector is used
@@ -54,7 +54,7 @@ test.describe("Home", () => {
   }) => {
     homePage = new HomePage(page);
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     //  click the button
     // await page.locator("#get-started").click(); //id selector is used
@@ -70,7 +70,7 @@ test.describe("Home", () => {
     homePage = new HomePage(page);
 
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     //  find the text locator. Text should be unique
     const headingText = homePage.headingText;
@@ -84,7 +84,7 @@ test.describe("Home", () => {
     homePage = new HomePage(page);
 
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // find home text
     const homeText = homePage.homeLink;
@@ -96,7 +96,7 @@ test.describe("Home", () => {
     homePage = new HomePage(page);
 
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // find home text
     const homeText = page.locator('#zak-primary-menu:has-text("Home")');
@@ -110,7 +110,7 @@ test.describe("Home", () => {
     homePage = new HomePage(page);
 
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // Find the search icon
     const searchIcon = homePage.searchIcon;
@@ -129,7 +129,7 @@ test.describe("Home", () => {
       "My account",
     ];
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // Find the nav links.
     const navLinks = homePage.navLinks;
@@ -148,7 +148,7 @@ test.describe("Home", () => {
       "My account",
     ];
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // Find the nav link using nth locator
     const navLink = homePage.navLinks.nth(3);
@@ -167,7 +167,7 @@ test.describe("Home", () => {
       "My account",
     ];
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // Find the nav link using first locator
     const navLink = homePage.navLinks.first();
@@ -186,7 +186,7 @@ test.describe("Home", () => {
       "My account",
     ];
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // Find the nav link using last locator
     const navLink = homePage.navLinks.last();
@@ -209,19 +209,20 @@ test.describe("Home", () => {
       "My account",
     ];
     //open url
-    await page.goto("https://practice.sdetunicorns.com");
+    await homePage.navigate(); //using page object model
 
     // Find the nav links using locator
-    const navLinks = homePage.navLinks;
-    let i = 0;
+    // const navLinks = homePage.navLinks;
+    // let i = 0;
     // elementHandles - NOTE Always prefer using Locators and web assertions over ElementHandles because latter are inherently racy.
 
     // Resolves given locator to all matching DOM elements. If there are no matching elements, returns an empty list.
-    for (let el of await navLinks.elementHandles()) {
-      console.log(el.textContent());
-      //   verify nav link text
-      expect(await el.textContent()).toEqual(expectedLinks[i]);
-      i++;
-    }
+    // for (let el of await navLinks.elementHandles()) {
+    //   console.log(el.textContent());
+    //   //   verify nav link text
+    //   expect(await el.textContent()).toEqual(expectedLinks[i]);
+    //   i++;
+    // }
+    expect(await homePage.getNavLinksText()).toEqual(expectedLinks);
   });
 });

@@ -22,6 +22,8 @@ test.describe("Upload File normally without dom manipulation as needed for hidde
     );
   });
   test("should upload a test file pdf and hardcoded wait", async ({ page }) => {
+    cartPage = new CartPage(page);
+
     // Open url
     await page.goto("https://practice.sdetunicorns.com/cart");
 
@@ -45,6 +47,8 @@ test.describe("Upload File normally without dom manipulation as needed for hidde
   test("should upload a test file pdf and conditional wait", async ({
     page,
   }) => {
+    cartPage = new CartPage(page);
+
     // Open url
     await page.goto("https://practice.sdetunicorns.com/cart");
 
@@ -67,6 +71,8 @@ test.describe("Upload File normally without dom manipulation as needed for hidde
     );
   });
   test("should upload a test file pdf and assertion wait", async ({ page }) => {
+    cartPage = new CartPage(page);
+
     // Open url
     await page.goto("https://practice.sdetunicorns.com/cart");
 
@@ -83,6 +89,8 @@ test.describe("Upload File normally without dom manipulation as needed for hidde
     );
   });
   test("should upload a test file in hidden input field", async ({ page }) => {
+    cartPage = new CartPage(page);
+
     // Open url
     await page.goto("https://practice.sdetunicorns.com/cart");
 

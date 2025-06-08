@@ -12,7 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 1_000_000,
+  timeout: 10_000,
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -30,7 +30,9 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. Collect traces of all tests you are running. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    // trace: "on-first-retry",
+    /* Collect trace for all tests This is trace viewer debugging. we can also adjust it for individual tests */
+    trace: "on",
   },
 
   /* Configure projects for major browsers */

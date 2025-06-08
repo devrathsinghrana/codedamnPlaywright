@@ -20,6 +20,15 @@ Above command will automatically execute tests file inside tests folder
 
 # npx playwright show-report - This will generate report
 
+<!-- Below are some debug commands for test cases -->
 # DEBUG=pw:api npx playwright test home.spec.ts
 
 above command will generate debug console logs and show how playwright works behind the scenes. run above command in git bash to get results
+
+# npx playwright show-trace test-results\contact-Contact-Fill-contact-form-and-verify-success-message-chromium\trace.zip
+
+run above command in powershell for smooth execution. It will open trace viewer
+
+# PWDEBUG=1 npx playwright test contact.spec.ts
+
+run above command to open playwright inspector which breaks the test just like debugger in js.

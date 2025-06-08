@@ -1,7 +1,12 @@
 import { test, expect } from "@playwright/test";
+import HomePage from "../pages/home.page";
 
 test.describe("Home", () => {
+  // HomePage type allows auto suggestions for HomePage class methods and properties
+  // so that we don't have to remember the methods and properties of HomePage class
+  let homePage: HomePage;
   test("Open HomePage and verify title", async ({ page }) => {
+    homePage = new HomePage(page);
     /*
     What happens if we skip await from below line.
 
@@ -31,11 +36,13 @@ test.describe("Home", () => {
     await expect(page).toHaveTitle("About – Practice E-Commerce Site");
   });
   test("Click get started button using css selector", async ({ page }) => {
+    homePage = new HomePage(page);
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
     //  click the button
-    await page.locator("#get-started").click(); //id selector is used
+    // await page.locator("#get-started").click(); //id selector is used
+    await homePage.getStartedBtn.click(); //using page object model
 
     //verify url has #get-started
     await expect(page).toHaveURL(
@@ -45,11 +52,13 @@ test.describe("Home", () => {
   test("Click get started button using css selector and regex", async ({
     page,
   }) => {
+    homePage = new HomePage(page);
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
     //  click the button
-    await page.locator("#get-started").click(); //id selector is used
+    // await page.locator("#get-started").click(); //id selector is used
+    await homePage.getStartedBtn.click(); //using page object model
 
     //verify url don't have #gesdf (This is part of negative assertion)
     await expect(page).not.toHaveURL(/.*#gesdf/);
@@ -58,11 +67,13 @@ test.describe("Home", () => {
     await expect(page).toHaveURL(/.*#get-started/);
   });
   test("Verifying heading text using text selector", async ({ page }) => {
+    homePage = new HomePage(page);
+
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
     //  find the text locator. Text should be unique
-    const headingText = page.locator("text=Think different. Make different.");
+    const headingText = homePage.headingText;
 
     //verify heading text is visible. not checking if on going to that page heading text is there but whatever page we are in currently heading text is visible. Assertion is done on the locator not page
     await expect(headingText).toBeVisible();
@@ -70,16 +81,20 @@ test.describe("Home", () => {
   test("Verify home link is enabled using text and css selector", async ({
     page,
   }) => {
+    homePage = new HomePage(page);
+
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
     // find home text
-    const homeText = page.locator("#zak-primary-menu >> text=Home");
+    const homeText = homePage.homeLink;
 
     // verify home text is enabled
     await expect(homeText).toBeEnabled();
   });
   test("Verify home link is enabled using css selector", async ({ page }) => {
+    homePage = new HomePage(page);
+
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
@@ -92,17 +107,19 @@ test.describe("Home", () => {
   test("Verify search icon is visible using xpath selector", async ({
     page,
   }) => {
+    homePage = new HomePage(page);
+
     //open url
     await page.goto("https://practice.sdetunicorns.com");
 
     // Find the search icon
-    const searchIcon = page.locator(
-      "//*[contains(@class, 'zak-header-actions--desktop')]//*[contains(@class, 'zak-header-search__toggle')]//*[contains(@class, 'zak-icon') and contains(@class, 'zakra-icon--magnifying-glass')]"
-    );
+    const searchIcon = homePage.searchIcon;
     //   verify search icon is visible
     await expect(searchIcon).toBeVisible();
   });
   test("Verify text of all nav links", async ({ page }) => {
+    homePage = new HomePage(page);
+
     const expectedLinks = [
       "Home",
       "About",
@@ -115,11 +132,13 @@ test.describe("Home", () => {
     await page.goto("https://practice.sdetunicorns.com");
 
     // Find the nav links.
-    const navLinks = page.locator("#zak-primary-menu li[id*=menu]");
+    const navLinks = homePage.navLinks;
     //   verify nav links text. allTextContents -  Returns an array of node.textContent values for all matching nodes. so order an value of links both will be verified on one condition that expectedLinks array has correct ordered links.
     expect(await navLinks.allTextContents()).toEqual(expectedLinks);
   });
   test("Verify text of particular nav link", async ({ page }) => {
+    homePage = new HomePage(page);
+
     const expectedLinks = [
       "Home",
       "About",
@@ -132,11 +151,13 @@ test.describe("Home", () => {
     await page.goto("https://practice.sdetunicorns.com");
 
     // Find the nav link using nth locator
-    const navLink = page.locator("#zak-primary-menu li[id*=menu]").nth(3);
+    const navLink = homePage.navLinks.nth(3);
     //   verify nav link text
     expect(await navLink.textContent()).toEqual(expectedLinks[3]);
   });
   test("Verify text of first nav link", async ({ page }) => {
+    homePage = new HomePage(page);
+
     const expectedLinks = [
       "Home",
       "About",
@@ -149,11 +170,13 @@ test.describe("Home", () => {
     await page.goto("https://practice.sdetunicorns.com");
 
     // Find the nav link using first locator
-    const navLink = page.locator("#zak-primary-menu li[id*=menu]").first();
+    const navLink = homePage.navLinks.first();
     //   verify nav link text
     expect(await navLink.textContent()).toEqual(expectedLinks[0]);
   });
   test("Verify text of last nav link", async ({ page }) => {
+    homePage = new HomePage(page);
+
     const expectedLinks = [
       "Home",
       "About",
@@ -166,7 +189,7 @@ test.describe("Home", () => {
     await page.goto("https://practice.sdetunicorns.com");
 
     // Find the nav link using last locator
-    const navLink = page.locator("#zak-primary-menu li[id*=menu]").last();
+    const navLink = homePage.navLinks.last();
     //   verify nav link text
     expect(await navLink.textContent()).toEqual(
       expectedLinks[expectedLinks.length - 1]
@@ -175,6 +198,8 @@ test.describe("Home", () => {
   test("Verify text of all nav links by iterating each link", async ({
     page,
   }) => {
+    homePage = new HomePage(page);
+
     const expectedLinks = [
       "Home",
       "About",
@@ -187,7 +212,7 @@ test.describe("Home", () => {
     await page.goto("https://practice.sdetunicorns.com");
 
     // Find the nav links using locator
-    const navLinks = page.locator("#zak-primary-menu li[id*=menu]");
+    const navLinks = homePage.navLinks;
     let i = 0;
     // elementHandles - NOTE Always prefer using Locators and web assertions over ElementHandles because latter are inherently racy.
 

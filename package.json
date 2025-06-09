@@ -8,7 +8,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.28.0",
     "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.18"
+    "@types/node": "^22.15.18",
+    "eslint": "^9.28.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.2.0",
+    "typescript-eslint": "^8.34.0"
+  },
+  "dependencies": {
+    "eslint-plugin-playwright": "^2.2.0"
   }
 }

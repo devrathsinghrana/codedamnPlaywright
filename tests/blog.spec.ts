@@ -1,11 +1,10 @@
-import { test, expect } from "@playwright/test";
-import BlogPage from "../pages/blog.page";
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+import { test, expect } from '@playwright/test';
+import BlogPage from '../pages/blog.page';
 
-test.describe("Blog", () => {
+test.describe('Blog', () => {
   let blogPage: BlogPage;
-  test("Verify Recent Posts count and verify the length of each list item", async ({
-    page,
-  }) => {
+  test('Verify Recent Posts count and verify the length of each list item', async ({ page }) => {
     blogPage = new BlogPage(page);
     // open blog page
     await blogPage.navigate();

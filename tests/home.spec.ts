@@ -1,11 +1,11 @@
-import { test, expect } from "@playwright/test";
-import HomePage from "../pages/home.page";
+import { test, expect } from '@playwright/test';
+import HomePage from '../pages/home.page';
 
-test.describe("Home", () => {
+test.describe('Home', () => {
   // HomePage type allows auto suggestions for HomePage class methods and properties
   // so that we don't have to remember the methods and properties of HomePage class
   let homePage: HomePage;
-  test("Open HomePage and verify title", async ({ page }) => {
+  test('Open HomePage and verify title', async ({ page }) => {
     homePage = new HomePage(page);
     /*
     What happens if we skip await from below line.
@@ -26,16 +26,16 @@ test.describe("Home", () => {
     Received string: "Practice E-Commerce Site – SDET Unicorns"
     */
     //verify title
-    await expect(page).toHaveTitle("Practice E-Commerce Site – SDET Unicorns");
+    await expect(page).toHaveTitle('Practice E-Commerce Site – SDET Unicorns');
   });
-  test("Open AboutPage and verify title", async ({ page }) => {
+  test('Open AboutPage and verify title', async ({ page }) => {
     //open url
-    await page.goto("https://practice.sdetunicorns.com/about");
+    await page.goto('https://practice.sdetunicorns.com/about');
 
     //verify title
-    await expect(page).toHaveTitle("About – Practice E-Commerce Site");
+    await expect(page).toHaveTitle('About – Practice E-Commerce Site');
   });
-  test("Click get started button using css selector", async ({ page }) => {
+  test('Click get started button using css selector', async ({ page }) => {
     homePage = new HomePage(page);
     //open url
     await homePage.navigate(); //using page object model
@@ -45,13 +45,9 @@ test.describe("Home", () => {
     await homePage.getStartedBtn.click(); //using page object model
 
     //verify url has #get-started
-    await expect(page).toHaveURL(
-      "https://practice.sdetunicorns.com/#get-started"
-    );
+    await expect(page).toHaveURL('https://practice.sdetunicorns.com/#get-started');
   });
-  test("Click get started button using css selector and regex", async ({
-    page,
-  }) => {
+  test('Click get started button using css selector and regex', async ({ page }) => {
     homePage = new HomePage(page);
     //open url
     await homePage.navigate(); //using page object model
@@ -66,7 +62,7 @@ test.describe("Home", () => {
     //verify url has #get-started
     await expect(page).toHaveURL(/.*#get-started/);
   });
-  test("Verifying heading text using text selector", async ({ page }) => {
+  test('Verifying heading text using text selector', async ({ page }) => {
     homePage = new HomePage(page);
 
     //open url
@@ -78,9 +74,7 @@ test.describe("Home", () => {
     //verify heading text is visible. not checking if on going to that page heading text is there but whatever page we are in currently heading text is visible. Assertion is done on the locator not page
     await expect(headingText).toBeVisible();
   });
-  test("Verify home link is enabled using text and css selector", async ({
-    page,
-  }) => {
+  test('Verify home link is enabled using text and css selector', async ({ page }) => {
     homePage = new HomePage(page);
 
     //open url
@@ -92,7 +86,7 @@ test.describe("Home", () => {
     // verify home text is enabled
     await expect(homeText).toBeEnabled();
   });
-  test("Verify home link is enabled using css selector", async ({ page }) => {
+  test('Verify home link is enabled using css selector', async ({ page }) => {
     homePage = new HomePage(page);
 
     //open url
@@ -104,9 +98,7 @@ test.describe("Home", () => {
     // verify home text is enabled
     await expect(homeText).toBeEnabled();
   });
-  test("Verify search icon is visible using xpath selector", async ({
-    page,
-  }) => {
+  test('Verify search icon is visible using xpath selector', async ({ page }) => {
     homePage = new HomePage(page);
 
     //open url
@@ -117,17 +109,10 @@ test.describe("Home", () => {
     //   verify search icon is visible
     await expect(searchIcon).toBeVisible();
   });
-  test("Verify text of all nav links", async ({ page }) => {
+  test('Verify text of all nav links', async ({ page }) => {
     homePage = new HomePage(page);
 
-    const expectedLinks = [
-      "Home",
-      "About",
-      "Shop",
-      "Blog",
-      "Contact",
-      "My account",
-    ];
+    const expectedLinks = ['Home', 'About', 'Shop', 'Blog', 'Contact', 'My account'];
     //open url
     await homePage.navigate(); //using page object model
 
@@ -136,78 +121,46 @@ test.describe("Home", () => {
     //   verify nav links text. allTextContents -  Returns an array of node.textContent values for all matching nodes. so order an value of links both will be verified on one condition that expectedLinks array has correct ordered links.
     expect(await navLinks.allTextContents()).toEqual(expectedLinks);
   });
-  test("Verify text of particular nav link", async ({ page }) => {
+  test('Verify text of particular nav link', async ({ page }) => {
     homePage = new HomePage(page);
 
-    const expectedLinks = [
-      "Home",
-      "About",
-      "Shop",
-      "Blog",
-      "Contact",
-      "My account",
-    ];
+    const expectedLinks = ['Home', 'About', 'Shop', 'Blog', 'Contact', 'My account'];
     //open url
     await homePage.navigate(); //using page object model
 
     // Find the nav link using nth locator
     const navLink = homePage.navLinks.nth(3);
     //   verify nav link text
-    expect(await navLink.textContent()).toEqual(expectedLinks[3]);
+    await expect(navLink).toHaveText(expectedLinks[3]);
   });
-  test("Verify text of first nav link", async ({ page }) => {
+  test('Verify text of first nav link', async ({ page }) => {
     homePage = new HomePage(page);
 
-    const expectedLinks = [
-      "Home",
-      "About",
-      "Shop",
-      "Blog",
-      "Contact",
-      "My account",
-    ];
+    const expectedLinks = ['Home', 'About', 'Shop', 'Blog', 'Contact', 'My account'];
     //open url
     await homePage.navigate(); //using page object model
 
     // Find the nav link using first locator
     const navLink = homePage.navLinks.first();
     //   verify nav link text
-    expect(await navLink.textContent()).toEqual(expectedLinks[0]);
+    await expect(navLink).toHaveText(expectedLinks[0]);
   });
-  test("Verify text of last nav link", async ({ page }) => {
+  test('Verify text of last nav link', async ({ page }) => {
     homePage = new HomePage(page);
 
-    const expectedLinks = [
-      "Home",
-      "About",
-      "Shop",
-      "Blog",
-      "Contact",
-      "My account",
-    ];
+    const expectedLinks = ['Home', 'About', 'Shop', 'Blog', 'Contact', 'My account'];
     //open url
     await homePage.navigate(); //using page object model
 
     // Find the nav link using last locator
     const navLink = homePage.navLinks.last();
     //   verify nav link text
-    expect(await navLink.textContent()).toEqual(
-      expectedLinks[expectedLinks.length - 1]
-    );
+    await expect(navLink).toHaveText(expectedLinks[expectedLinks.length - 1]);
   });
-  test("Verify text of all nav links by iterating each link", async ({
-    page,
-  }) => {
+  test('Verify text of all nav links by iterating each link', async ({ page }) => {
     homePage = new HomePage(page);
 
-    const expectedLinks = [
-      "Home",
-      "About",
-      "Shop",
-      "Blog",
-      "Contact",
-      "My account",
-    ];
+    const expectedLinks = ['Home', 'About', 'Shop', 'Blog', 'Contact', 'My account'];
     //open url
     await homePage.navigate(); //using page object model
 

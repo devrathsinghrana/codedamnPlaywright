@@ -30,7 +30,7 @@ test.describe('Home', () => {
   });
   test('Open AboutPage and verify title', async ({ page }) => {
     //open url
-    await page.goto('https://practice.sdetunicorns.com/about');
+    await page.goto('/about');
 
     //verify title
     await expect(page).toHaveTitle('About – Practice E-Commerce Site');

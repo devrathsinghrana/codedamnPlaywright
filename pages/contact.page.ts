@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page } from '@playwright/test';
 
 class ContactPage {
   private page: Page;
@@ -11,24 +11,19 @@ class ContactPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.nameInput = page.locator("contact-name input");
-    this.emailInput = page.locator("contact-email input");
-    this.phoneInput = page.locator("contact-phone input");
-    this.messageTextArea = page.locator("contact-message input");
-    this.submitBtn = page.locator("button[type=submit]");
+    this.nameInput = page.locator('contact-name input');
+    this.emailInput = page.locator('contact-email input');
+    this.phoneInput = page.locator('contact-phone input');
+    this.messageTextArea = page.locator('contact-message input');
+    this.submitBtn = page.locator('button[type=submit]');
     this.successTxt = page.locator("div[role='alert]");
   }
 
   async navigate() {
-    await this.page.goto("https://practice.sdetunicorns.com/contact");
+    await this.page.goto('/contact');
   }
 
-  async submitForm(
-    name: string,
-    email: string,
-    phone: string,
-    message: string
-  ) {
+  async submitForm(name: string, email: string, phone: string, message: string) {
     await this.nameInput.fill(name);
     await this.emailInput.fill(email);
     await this.phoneInput.fill(phone);

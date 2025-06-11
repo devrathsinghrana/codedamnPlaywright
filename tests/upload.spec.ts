@@ -7,7 +7,7 @@ test.describe('Upload File normally without dom manipulation as needed for hidde
   test('should upload a test file', async ({ page }) => {
     cartPage = new CartPage(page);
     // Open url
-    await page.goto('https://practice.sdetunicorns.com/cart');
+    await page.goto('/cart');
 
     // store test file path which will be uploaded
     const filePath = path.join(__dirname, '../data/herobg.png');
@@ -23,7 +23,7 @@ test.describe('Upload File normally without dom manipulation as needed for hidde
     cartPage = new CartPage(page);
 
     // Open url
-    await page.goto('https://practice.sdetunicorns.com/cart');
+    await page.goto('/cart');
 
     // store test file path which will be uploaded
     // Note: This file is larger than 2 MB, so it will take more time to upload
@@ -44,7 +44,7 @@ test.describe('Upload File normally without dom manipulation as needed for hidde
     cartPage = new CartPage(page);
 
     // Open url
-    await page.goto('https://practice.sdetunicorns.com/cart');
+    await page.goto('/cart');
 
     // store test file path which will be uploaded
     const filePath = path.join(__dirname, '../data/3-mb-file.pdf');
@@ -66,7 +66,7 @@ test.describe('Upload File normally without dom manipulation as needed for hidde
     cartPage = new CartPage(page);
 
     // Open url
-    await page.goto('https://practice.sdetunicorns.com/cart');
+    await page.goto('/cart');
 
     // store test file path which will be uploaded
     const filePath = path.join(__dirname, '../data/3-mb-file.pdf');
@@ -84,7 +84,7 @@ test.describe('Upload File normally without dom manipulation as needed for hidde
     cartPage = new CartPage(page);
 
     // Open url
-    await page.goto('https://practice.sdetunicorns.com/cart');
+    await page.goto('/cart');
 
     // store test file path which will be uploaded
     const filePath = path.join(__dirname, '../data/herobg.png');

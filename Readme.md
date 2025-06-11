@@ -32,3 +32,9 @@ run above command in powershell for smooth execution. It will open trace viewer
 # PWDEBUG=1 npx playwright test contact.spec.ts
 
 run above command to open playwright inspector which breaks the test just like debugger in js.
+
+# Base url in playwright config allows us to write page.goto() actions with only page endpoints
+
+# We use faker js library to handle fake data
+
+# Hooks are common piece of code which can run before or after each test execution according to our implementation

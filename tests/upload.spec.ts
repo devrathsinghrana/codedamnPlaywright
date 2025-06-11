@@ -4,6 +4,26 @@ import path from 'path';
 
 test.describe('Upload File normally without dom manipulation as needed for hidden input file field', () => {
   let cartPage: CartPage;
+
+  // We are making a parameterize test suite to run the same test with different files
+  const fileName = ['herobg.png', '3-mb-file.pdf'];
+  fileName.forEach((file) => {
+    test(`should upload a test file ${file}`, async ({ page }) => {
+      cartPage = new CartPage(page);
+      // Open url
+      await page.goto('/cart');
+
+      // store test file path which will be uploaded
+      const filePath = path.join(__dirname, `../data/${file}`);
+
+      // upload test file
+      cartPage.uploadComponent().uploadFile(filePath);
+
+      // assertion
+      await expect(cartPage.uploadComponent().successTxt).toContainText('uploaded successfully');
+    });
+  });
+
   test('should upload a test file', async ({ page }) => {
     cartPage = new CartPage(page);
     // Open url

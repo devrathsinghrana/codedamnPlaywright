@@ -38,3 +38,5 @@ run above command to open playwright inspector which breaks the test just like d
 # We use faker js library to handle fake data
 
 # Hooks are common piece of code which can run before or after each test execution according to our implementation
+
+# PARAMETERIZE our tests i.e. we are passing different data in same test using parameters. It is different from randomize test data we used with faker as we can decide the number of tests and the values of parameters for each test. Like we can run a test 3 tests with 3 sets of different data using parameters.

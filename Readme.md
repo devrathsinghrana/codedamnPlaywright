@@ -40,3 +40,5 @@ run above command to open playwright inspector which breaks the test just like d
 # Hooks are common piece of code which can run before or after each test execution according to our implementation
 
 # PARAMETERIZE our tests i.e. we are passing different data in same test using parameters. It is different from randomize test data we used with faker as we can decide the number of tests and the values of parameters for each test. Like we can run a test 3 tests with 3 sets of different data using parameters.
+
+# AUTHENTICATION - we have two test cases - one to access orders and other to access downloads. But they will require authentication. We can't just make login test as even if login test pass we cant communicate the same to access orders and downloads test cases as they are dependent on it so we need work around. Each test is running on separate browser so we need to login before each test run thus beforeEach hook is the work around inside which we will authenticate user before each test execution.

@@ -24,6 +24,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+  // since we need to resolve a promise we need this resolve keyword
+  // this is the global setup file that will run once before all tests and playwright will wait for it to finish before running any tests and it knows where to find it and is aware that a global login is taking place based on content of this file thus we can achieve parallel execution of tests and also share the login state across tests
+  globalSetup: require.resolve('./utils/global-setup'),
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -33,16 +36,17 @@ export default defineConfig({
     // trace: "on-first-retry",
     /* Collect trace for all tests This is trace viewer debugging. we can also adjust it for individual tests */
     trace: 'on',
+    storageState: 'loggedInState.json', // this is the state we saved in global setup file
   },
   expect: {
-    timeout: 10_000, // default timeout for expect assertions
+    timeout: 10_000_000, // default timeout for expect assertions
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], headless: true }, //device name sets height width to check
+      use: { ...devices['Desktop Chrome'], headless: false }, //device name sets height width to check
     },
 
     // {

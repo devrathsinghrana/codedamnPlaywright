@@ -23,7 +23,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. set how many workers to be allowed for parallel execution of tests. undefined means unlimited workers */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['allure-playwright'], ['line']], //this will automatically generate reports in both formats
   // since we need to resolve a promise we need this resolve keyword
   // this is the global setup file that will run once before all tests and playwright will wait for it to finish before running any tests and it knows where to find it and is aware that a global login is taking place based on content of this file thus we can achieve parallel execution of tests and also share the login state across tests
   globalSetup: require.resolve('./utils/global-setup'),
@@ -46,7 +46,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], headless: false }, //device name sets height width to check
+      use: { ...devices['Desktop Chrome'], headless: true }, //device name sets height width to check
     },
 
     // {

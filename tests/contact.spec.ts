@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import ContactPage from '../pages/contact.page';
 import { faker } from '@faker-js/faker';
 
+// Declares a focused group of tests. If there are some focused tests or suites, all of them will be run but nothing else. Useful when we want to run only a specific test or suite without running the entire test suite.
+// test.describe.only('Contact', () => {
 test.describe('Contact', () => {
   let contactPage: ContactPage;
   test('Fill contact form and verify success message', async ({ page }) => {
